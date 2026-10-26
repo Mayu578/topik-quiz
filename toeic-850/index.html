@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TOEIC 850 ドリル</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--tx:#222;--sub:#666;--ac:#2b5fd9;--ok:#1a8a4a;--ng:#c8372d;--bd:#ddd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17181b;--card:#222428;--tx:#eee;--sub:#aaa;--ac:#7aa2ff;--ok:#4cc582;--ng:#ff7a70;--bd:#3a3d44}}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
+.w{max-width:680px;margin:0 auto;padding:16px 16px 80px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin:12px 0}
+.p{font-size:17px;white-space:pre-wrap}
+button{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px;width:100%;text-align:left;margin:6px 0;cursor:pointer}
+button.p1{background:var(--ac);color:#fff;text-align:center;border:0}
+button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+button.ng{border-color:var(--ng);background:color-mix(in srgb,var(--ng) 18%,var(--card))}
+.s{color:var(--sub);font-size:13px}.bar{height:6px;background:var(--bd);border-radius:3px}.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+.v{background:var(--bg);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:14px}.v span{font-weight:700;color:var(--ac)}
+.sp{cursor:pointer;margin:0 6px;font-weight:400!important}.dr{border:1px solid var(--bd);border-radius:8px;padding:10px;margin:8px 0}
+input{font:inherit;width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx)}a{color:var(--ac)}
+.t{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--bd);margin-right:6px}
+</style></head><body><div class="w" id="app"></div>
+<script>
+// [ラベル, 問題文, 種類, 選択肢4つ, 正解index, 解説, 単語[[語,意味]], 日本語訳]
+const Q=[
+["P5","The merger will proceed as planned ------ the board receives final regulatory approval by March.","文法",["in case","provided that","even though","owing to"],1,"「承認を得るという条件で進む」＝条件を表す provided that。in case は「〜に備えて」、even though は譲歩、owing to は前置詞なので節を続けられません。",[["merger","合併"],["proceed","進行する"],["regulatory","規制の"],["provided that","〜という条件で"]],"合併は、取締役会が3月までに最終的な規制当局の承認を得る（という条件で）予定通り進められる。"],
+["P5","Employees ------ expense reports are overdue will not be reimbursed until they are filed.","関係詞",["whose","who","which","whom"],0,"後ろの名詞 expense reports を修飾して「その人の経費報告書」→所有格の whose。",[["expense report","経費報告書"],["overdue","期限を過ぎた"],["reimburse","払い戻す"],["file","提出する"]],"経費報告書の期限が過ぎている従業員は、提出されるまで払い戻しを受けられない。"],
+["P5","The company's new policy is designed to ------ productivity without increasing overtime.","語彙",["enhance","enclose","endure","enroll"],0,"productivity（生産性）を目的語に取れるのは enhance（高める）。enclose＝同封する、endure＝耐える、enroll＝登録する。",[["enhance","高める"],["enclose","同封する"],["endure","耐える"],["enroll","登録する"],["overtime","残業"]],"同社の新方針は、残業を増やさずに生産性を（高める）よう設計されている。"],
+["P5","Due to the ------ of qualified candidates, the hiring process has been extended.","語彙",["scarcity","variety","proximity","capacity"],0,"採用が延びた理由＝適任者の「不足」。variety＝多様性、proximity＝近さ、capacity＝容量。",[["scarcity","不足"],["qualified","資格のある"],["candidate","候補者"],["extend","延長する"]],"適任の候補者の（不足）のため、採用手続きが延長された。"],
+["P5","------ the extensive renovations, the museum will remain open throughout the summer.","前置詞/接続詞",["Although","Despite","Because","Unless"],1,"後ろが名詞句（the extensive renovations）なので前置詞の Despite。Although / Because / Unless は後ろに節（主語＋動詞）が必要です。",[["extensive","大規模な"],["renovation","改装"],["remain","〜のままである"],["throughout","〜の間ずっと"]],"大規模な改装（にもかかわらず）、博物館は夏の間ずっと開館している。"],
+["P5","All visitors must ------ a valid ID at the front desk before entering the facility.","動詞",["present","represent","presence","presented"],0,"must の後ろは動詞の原形。「提示する」は present。represent は「代表する」。",[["valid","有効な"],["present","提示する"],["facility","施設"],["represent","代表する"]],"すべての来訪者は、施設に入る前に受付で有効な身分証明書を（提示し）なければならない。"],
+["P5","The CEO is known for her ------ approach to resolving conflicts between departments.","品詞",["diplomatic","diplomat","diplomatically","diplomacy"],0,"名詞 approach を修飾するのは形容詞 diplomatic（如才ない・外交的な）。",[["resolve","解決する"],["conflict","対立"],["diplomatic","如才ない"],["approach","取り組み方"]],"そのCEOは、部署間の対立を解決する（如才ない）やり方で知られている。"],
+["P5","Please submit the signed contract ------ Friday at the latest.","前置詞",["by","until","during","since"],0,"「〜までに（期限）」は by。until は「〜までずっと（継続）」、during は期間、since は起点です。at the latest（遅くとも）とも相性が良い。",[["submit","提出する"],["contract","契約書"],["at the latest","遅くとも"]],"署名済みの契約書は、遅くとも金曜日（までに）提出してください。"],
+["P5","The quarterly report indicates that sales have ------ increased since the new marketing campaign launched.","品詞",["steadily","steady","steadiness","steadier"],0,"動詞 increased を修飾するのは副詞 steadily。",[["quarterly","四半期の"],["indicate","示す"],["steadily","着実に"],["launch","開始する"]],"四半期報告書によると、新しいキャンペーン開始以来、売上は（着実に）増加している。"],
+["P5","Mr. Kim, ------ has worked at the firm for twenty years, will retire next month.","関係詞",["who","whom","whose","which"],0,"先行詞は人（Mr. Kim）で、関係詞節の主語になる→主格 who。",[["firm","会社"],["retire","退職する"]],"キム氏は、20年間その会社で働いてきたが、来月退職する。"],
+["P5","The supplier failed to ------ the delivery deadline, causing delays in production.","語彙",["meet","hold","reach out","keep up"],0,"「期限を守る」は meet a deadline。",[["supplier","供給業者"],["deadline","期限"],["meet a deadline","期限に間に合う"],["delay","遅れ"]],"供給業者が納期を（守れ）なかったため、生産に遅れが出た。"],
+["P5","Customers are advised to retain their receipts as proof of ------.","品詞",["purchase","purchased","purchasing","purchaser"],0,"proof of ＋名詞。「購入の証明」＝proof of purchase。purchaser は「購入者」で意味が合いません。",[["advise","勧める"],["retain","保管する"],["receipt","領収書"],["proof","証拠"]],"お客様は、（購入）の証明として領収書を保管することをお勧めします。"],
+["P5","Had the shipment arrived on time, the client ------ the penalty fee.","仮定法",["would not have charged","wouldn't charge","hasn't charged","wouldn't have been charged"],3,"Had＋主語＋過去分詞は if の省略（仮定法過去完了）。主節は would have＋過去分詞。顧客は「請求される側」なので受動態 would not have been charged。",[["shipment","出荷品"],["penalty fee","違約金"],["charge","請求する"]],"出荷品が時間通りに届いていれば、顧客は違約金を（請求されなかった）だろう。"],
+["P5","The new software is compatible ------ most operating systems currently on the market.","前置詞",["to","with","for","on"],1,"be compatible with ＝〜と互換性がある（決まった形）。",[["compatible","互換性のある"],["operating system","OS"],["currently","現在"]],"この新しいソフトは、現在市場に出ている大半のOSと互換性が（ある）。"],
+["P7","NOTICE: Because of scheduled maintenance, the parking garage will be closed from 9 P.M. Friday until 6 A.M. Monday. Employees are encouraged to use the lot on Elm Street. Shuttle service will be available every 15 minutes.\n\nQ. What is the purpose of this notice?","読解",["To announce a temporary closure","To introduce a new parking fee","To recruit shuttle drivers","To report a construction delay"],0,"冒頭で「点検のため駐車場を閉鎖する」と述べ、代わりの駐車場とシャトルを案内しています。目的は一時閉鎖の告知。料金・運転手募集・工事の遅れは本文にありません。",[["maintenance","保守点検"],["encourage","勧める"],["available","利用できる"],["temporary","一時的な"]],"お知らせ：定期点検のため、駐車場は金曜午後9時から月曜午前6時まで閉鎖されます。従業員にはエルム通りの駐車場の利用をお勧めします。シャトルは15分ごとに利用できます。\n\nQ. このお知らせの目的は何ですか。"]
+];
+const app=document.getElementById('app');let qs,i,sc,wrong,done;
+function shuffle(a){a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[a[k],a[j]]=[a[j],a[k]]}return a}
+function sh(q){const ix=shuffle([0,1,2,3]);return[...q.slice(0,3),ix.map(k=>q[3][k]),ix.indexOf(q[4]),...q.slice(5)]}
+function home(){app.innerHTML=`<h2>TOEIC 850 ドリル</h2><div class="c"><p>TOEIC Part5・Part7形式のオリジナル問題 ${Q.length}問。</p><p class="s">選択肢はシャッフルされます。解答後に解説・日本語訳・単語が出ます。右下の「🔍 辞書」で単語と発音を調べられます。</p><button class="p1" onclick="start(Q)">全問に挑戦</button><button class="p1" onclick="start(shuffle(Q).slice(0,8))">ランダム8問</button></div><p class="s">※公式の過去問ではなく、TOEIC形式で作ったオリジナル問題です。正答・解説は作成したものなので、気になる点は文法書や辞書でも確認してください。</p>`}
+function start(l){qs=shuffle(l).map(sh);i=0;sc=0;wrong=[];show()}
+function show(){if(i>=qs.length)return end();const q=qs[i];done=false;
+app.innerHTML=`<div class="s">${i+1} / ${qs.length}　正解 ${sc}</div><div class="bar"><i style="width:${i/qs.length*100}%"></i></div><div class="c"><span class="t">${q[0]}</span><span class="t">${q[2]}</span><div class="p" style="margin-top:8px">${q[1]}</div></div><div id="o">${q[3].map((t,k)=>`<button onclick="pick(${k})">${'①②③④'[k]} ${t}</button>`).join('')}</div><div id="x"></div>`}
+function pick(k){if(done)return;done=true;const q=qs[i],b=document.querySelectorAll('#o button');b[q[4]].classList.add('ok');
+if(k==q[4])sc++;else{b[k].classList.add('ng');wrong.push(q)}
+document.getElementById('x').innerHTML=`<div class="c"><b>${k==q[4]?'⭕ 正解':'❌ 不正解（正解は'+'①②③④'[q[4]]+'）'}</b><p>${q[5]}</p><div class="v" style="white-space:pre-wrap"><b>🇯🇵 日本語訳</b>\n${q[7]}</div><div class="v"><b>📖 単語・表現</b>${q[6].map(w=>`<div><span>${w[0]}</span><span class="sp" onclick="say('${w[0]}')">🔊</span>${w[1]}</div>`).join('')}</div><button class="p1" onclick="i++;show()">${i+1<qs.length?'次へ':'結果を見る'}</button></div>`}
+const D={};Q.forEach(q=>q[6].forEach(w=>D[w[0]]=w[1]));
+function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function dict(){const d=document.getElementById('dp');d.style.display=d.style.display=='block'?'none':'block'}
+function look(){const v=document.getElementById('di').value.trim(),o=document.getElementById('dr');if(!v){o.innerHTML='';return}
+const lv=v.toLowerCase(),r=Object.entries(D).filter(([k,m])=>k.toLowerCase().includes(lv)||m.includes(v)).slice(0,8),e=encodeURIComponent(v),sv=v.replace(/'/g,'');
+o.innerHTML=(r.length?r.map(([k,m])=>`<div class="dr"><b>${k}</b> <span class="sp" onclick="say('${k}')">🔊</span> ${m}</div>`).join(''):'<p class="s">アプリ内の単語帳には見つかりませんでした。</p>')+`<div class="dr"><b>${v}</b> <span class="sp" onclick="say('${sv}')">🔊</span><div id="on" class="s">オンラインで検索中…</div><p><a target="_blank" rel="noopener" href="https://ejje.weblio.jp/content/${e}">Weblio</a>　<a target="_blank" rel="noopener" href="https://eow.alc.co.jp/search?q=${e}">英辞郎</a>　<a target="_blank" rel="noopener" href="https://translate.google.com/?sl=en&tl=ja&text=${e}">Google翻訳</a></p></div>`;online(v)}
+async function online(v){const el=document.getElementById('on');if(!el)return;const en=/^[\x20-\x7e]+$/.test(v);let t='';
+try{const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(v)+'&langpair='+(en?'en|ja':'ja|en'));t='翻訳：'+(await r.json()).responseData.translatedText}catch(x){}
+try{if(en&&!v.includes(' ')){const r=await fetch('https://api.dictionaryapi.dev/v2/entries/en/'+encodeURIComponent(v));const j=await r.json();t+='　発音記号：'+(j[0].phonetic||'')}}catch(x){}
+el.textContent=t||'オンライン検索はこの環境では使えません。下のリンクで調べられます。'}
+document.body.insertAdjacentHTML('beforeend','<button onclick="dict()" style="position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:auto;border-radius:99px;box-shadow:0 2px 8px #0004;z-index:10">🔍 辞書</button><div id="dp" style="display:none;position:fixed;left:0;right:0;bottom:0;max-height:70%;overflow:auto;background:var(--card);border-top:1px solid var(--bd);padding:14px 16px 70px;z-index:9"><b>単語・発音を調べる</b><input id="di" placeholder="英語または日本語を入力" oninput="clearTimeout(window.tm);window.tm=setTimeout(look,500)"><div id="dr"></div><p class="s">🔊で英語の音声を聞けます（端末の音声を使用）。</p></div>');
+function end(){app.innerHTML=`<h2>結果：${sc} / ${qs.length}</h2><div class="c"><div class="bar"><i style="width:${sc/qs.length*100}%"></i></div>${wrong.length?`<button class="p1" style="margin-top:12px" onclick="start(wrong)">間違えた${wrong.length}問をやり直す</button>`:'<p>全問正解！🎉</p>'}<button onclick="home()">トップへ</button></div>`}
+home();
+</script></body></html>

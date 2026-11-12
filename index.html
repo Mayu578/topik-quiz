@@ -1,61 +1,20 @@
 <!DOCTYPE html>
-<html lang="ja"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>TOPIK 6級 読解ドリル（ミックス）</title>
-<style>
-:root{--bg:#f7f6f2;--card:#fff;--tx:#222;--sub:#666;--ac:#2b5fd9;--ok:#1a8a4a;--ng:#c8372d;--bd:#ddd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17181b;--card:#222428;--tx:#eee;--sub:#aaa;--ac:#7aa2ff;--ok:#4cc582;--ng:#ff7a70;--bd:#3a3d44}}
-html,body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Hiragino Sans","Noto Sans JP","Noto Sans KR",sans-serif;line-height:1.7}
-.w{max-width:680px;margin:0 auto;padding:16px 16px 80px}
-.c{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin:12px 0}
-.p{font-size:16px;white-space:pre-wrap}
-button{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px;width:100%;text-align:left;margin:6px 0;cursor:pointer}
-button.p1{background:var(--ac);color:#fff;text-align:center;border:0}
-button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
-button.ng{border-color:var(--ng);background:color-mix(in srgb,var(--ng) 18%,var(--card))}
-.s{color:var(--sub);font-size:13px}
-.bar{height:6px;background:var(--bd);border-radius:3px}
-.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
-.v{background:var(--bg);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:14px}
-.v span{font-weight:700;color:var(--ac)}
-.sp{cursor:pointer;margin:0 6px;font-weight:400!important}
-.dr{border:1px solid var(--bd);border-radius:8px;padding:10px;margin:8px 0}
-input{font:inherit;width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx)}
-a{color:var(--ac)}
-.t{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--bd);margin-right:6px}
-</style></head>
-<body><a href="toeic-850/index.html">英語クイズへ</a><div class="w" id="app"></div>
-<script>
-const Q=[
-["科学","수면 중에 뇌는 하루 동안 쌓인 노폐물을 씻어 낸다. 그래서 잠을 충분히 자지 못하면 （　） 쉽다. 노폐물이 제거되지 않은 채 남아 있기 때문이다.","「穴埋め」",["집중력이 떨어지기","식욕이 사라지기","꿈을 많이 꾸기","체온이 내려가기"],0,"理由「老廃物が残っているから」→ 脳の働き（集中力）の低下につながる。",[["노폐물","老廃物"],["씻어 내다","洗い流す"],["제거되다","除去される"],["집중력","集中力"]],"睡眠中、脳は一日の間にたまった老廃物を洗い流す。そのため十分に眠れないと（集中力が落ち）やすい。老廃物が取り除かれないまま残っているからだ。"],
-["経済","최근 배달 앱 수수료가 올라 소상공인의 부담이 커지고 있다. 수수료 부담이 커지면 가게는 음식 값을 올리게 되고, 결국 （　） 것이다.","「穴埋め」",["배달 기사의 수입이 늘어나는","가게의 매출이 저절로 늘어나는","소비자가 그 부담을 떠안게 되는","앱 회사가 수수료를 낮추게 되는"],2,"手数料↑→価格↑ の流れの帰結＝最終的に消費者が負担する。",[["수수료","手数料"],["소상공인","小規模事業者"],["부담","負担"],["떠안다","背負い込む"]],"最近、配達アプリの手数料が上がり、小規模事業者の負担が大きくなっている。手数料の負担が増えれば店は料理の値段を上げ、結局（消費者がその負担を背負うことになる）のだ。"],
-["言語","언어는 사회와 함께 변한다. 새로운 물건이 생기면 새 단어가 생기고, 쓰이지 않게 된 물건의 이름은 （　）. 사전에는 남아 있어도 일상에서는 듣기 어려워진다.","「穴埋め」",["더 자주 쓰이게 된다","서서히 잊힌다","다른 나라로 전해진다","새로운 뜻이 더해진다"],1,"後ろの「日常では聞かなくなる」と対応＝徐々に忘れられる。",[["일상","日常"],["서서히","徐々に"],["잊히다","忘れられる"],["쓰이다","使われる"]],"言語は社会とともに変わる。新しい物ができれば新しい単語が生まれ、使われなくなった物の名前は（徐々に忘れられる）。辞書には残っていても、日常では耳にしにくくなる。"],
-["文化","온돌은 바닥 아래로 뜨거운 공기를 지나가게 해 방을 데우는 난방 방식이다. 바닥 전체를 데우기 때문에 （　） 장점이 있다. 불을 끈 뒤에도 따뜻함이 오래 남는다.","「穴埋め」",["방이 오래 따뜻하게 유지되는","바닥이 금방 식는","습기가 쉽게 차는","연료가 전혀 들지 않는"],0,"次の文「불을 끈 뒤에도 따뜻함이 오래 남는다」を言い換えた内容が入る。",[["온돌","オンドル"],["데우다","温める"],["난방","暖房"],["유지되다","維持される"]],"オンドルは、床下に熱い空気を通して部屋を暖める暖房方式だ。床全体を暖めるため、（部屋が長く暖かく保たれる）という長所がある。火を消した後も暖かさが長く残る。"],
-["社会","원격 근무가 확산되면서 출퇴근 시간이 줄었다.（㉠）업무 시간도 유연해져 개인 생활을 챙기기 쉬워졌다.（㉡）집에서 일하다 보니 일과 휴식의 경계가 흐려졌다.（㉢）이에 일부 기업은 퇴근 후 연락을 제한하는 규칙을 만들고 있다.（㉣）\n\n〈文〉그러나 이러한 변화가 모든 면에서 긍정적인 것은 아니다.","「文挿入」どこに入る？",["㉠","㉡","㉢","㉣"],1,"長所（通勤短縮・柔軟な時間）を述べた後、「しかし」で短所（境界が曖昧）へ転換する位置＝㉡。",[["원격 근무","リモートワーク"],["확산되다","広がる"],["유연하다","柔軟だ"],["경계","境界"],["제한하다","制限する"]],"リモートワークが広がり、通勤時間が減った。（㉠）勤務時間も柔軟になり、私生活を大事にしやすくなった。（㉡）家で働くうちに、仕事と休息の境目があいまいになった。（㉢）これを受け、一部の企業は退勤後の連絡を制限するルールを作っている。（㉣）\n\n〈文〉しかし、こうした変化がすべての面で肯定的なわけではない。"],
-["食文化","김치는 배추를 소금에 절여 발효시킨 음식이다.（㉠）발효 과정에서 유산균이 만들어지는데, 온도에 따라 유산균의 활동이 달라진다.（㉡）낮은 온도에서는 천천히 익어 깊은 맛이 난다.（㉢）반대로 높은 온도에서는 빨리 시어진다.（㉣）\n\n〈文〉이처럼 김치의 맛은 보관 온도에 따라 크게 달라진다.","「文挿入」どこに入る？",["㉠","㉡","㉢","㉣"],3,"「이처럼（このように）」＝低温・高温の二つの例を受けるまとめ＝最後の㉣。",[["절이다","漬ける"],["발효","発酵"],["유산균","乳酸菌"],["익다","熟す"],["시어지다","酸っぱくなる"]],"キムチは白菜を塩に漬けて発酵させた食べ物だ。（㉠）発酵の過程で乳酸菌が作られるが、温度によって乳酸菌の活動が変わる。（㉡）低い温度ではゆっくり熟成して深い味になる。（㉢）反対に高い温度では早く酸っぱくなる。（㉣）\n\n〈文〉このように、キムチの味は保管温度によって大きく変わる。"],
-["科学","벌은 꽃에서 꿀을 모으면서 꽃가루를 다른 꽃으로 옮긴다. 이 과정에서 식물은 열매를 맺을 수 있다. 따라서 벌이 줄어들면 （　） 문제가 생긴다.","「穴埋め」",["꽃의 색깔이 변하는","꿀의 가격이 내려가는","날씨가 더 추워지는","농작물의 수확량이 줄어드는"],3,"蜂が受粉を助ける→減ると実がなりにくい＝収穫量の減少。",[["꽃가루","花粉"],["열매를 맺다","実を結ぶ"],["농작물","農作物"],["수확량","収穫量"]],"蜂は花から蜜を集めながら、花粉を別の花へ運ぶ。この過程で植物は実をつけることができる。したがって蜂が減ると、（農作物の収穫量が減る）という問題が生じる。"],
-["科学・技術","인공지능이 쓴 글이 문학상에 당선되는 시대가 되었다. 그러나 글을 쓴다는 것은 단어를 이어 붙이는 일이 아니라 자신의 경험과 고민을 담는 일이다. 기계가 아무리 매끄러운 문장을 만들어도 삶을 겪어 본 사람의 목소리를 대신할 수는 없다.","「主題」",["인공지능의 글쓰기 기술은 계속 발전해야 한다.","문학상 심사 기준을 새로 만들어야 한다.","인공지능은 인간의 경험이 담긴 글을 대신하기 어렵다.","글쓰기 교육을 더 일찍 시작해야 한다."],2,"「그러나」以降が主張。最後の文＝人の声は機械が代われない。",[["당선되다","当選する"],["이어 붙이다","つなぎ合わせる"],["매끄럽다","なめらかだ"],["대신하다","代わりをする"]],"AIが書いた文章が文学賞に当選する時代になった。しかし文章を書くとは、単語をつなぎ合わせることではなく、自分の経験や悩みを込めることだ。機械がどれだけなめらかな文を作っても、人生を経験した人の声を代わりに担うことはできない。"],
-["環境","일회용 컵 보증금제는 컵을 반납하면 돈을 돌려주는 제도이다. 처음에는 번거롭다는 불만이 많았지만, 반납률이 오르면서 쓰레기가 눈에 띄게 줄었다. 작은 불편이 있더라도 이 제도를 지속적으로 확대할 필요가 있다.","「主題」",["일회용 컵 보증금제는 불편함이 있어도 확대해야 한다.","컵 반납 절차를 지금보다 간단하게 만들어야 한다.","쓰레기 처리 비용을 소비자가 모두 부담해야 한다.","일회용 컵 보증금제는 효과가 없으므로 폐지해야 한다."],0,"最後の文「확대할 필요가 있다」が筆者の主張。",[["보증금","保証金・デポジット"],["반납","返却"],["번거롭다","煩わしい"],["확대하다","拡大する"]],"使い捨てカップの保証金制度は、カップを返却すればお金が戻る制度だ。最初は面倒だという不満が多かったが、返却率が上がるにつれゴミが目に見えて減った。多少の不便があっても、この制度を継続的に拡大する必要がある。"],
-["歴史","문화재 복원은 원래 모습을 되살리는 일이다. 하지만 자료가 부족한 상태에서 무리하게 복원하면 오히려 원형을 훼손할 수 있다. 따라서 복원은 충분한 고증을 거친 뒤에 신중하게 이루어져야 한다.","「主題」",["문화재는 가능한 한 모두 복원해야 한다.","복원 기술 개발에 더 많이 투자해야 한다.","문화재 관람료를 낮춰 접근성을 높여야 한다.","문화재 복원은 충분한 고증을 바탕으로 신중하게 해야 한다."],3,"「따라서」以降が結論＝十分な考証のうえで慎重に。",[["복원","復元"],["원형","原形"],["훼손하다","損なう"],["고증","考証"]],"文化財の復元は、元の姿をよみがえらせることだ。しかし資料が不足した状態で無理に復元すると、かえって原形を損なうおそれがある。したがって復元は、十分な考証を経たうえで慎重に行われるべきだ。"],
-["社会","요즘 '혼밥'이 늘면서 혼자 밥 먹는 것을 이상하게 보는 시선이 줄었다. 하지만 식사는 단순히 영양을 채우는 일이 아니라 대화를 통해 관계를 쌓는 시간이기도 하다. 가끔은 가족이나 친구와 함께하는 식탁의 가치를 되돌아볼 필요가 있다.","「筆者の態度」",["함께하는 식사의 가치를 다시 생각해 보자고 권하고 있다.","혼밥 문화가 확산되는 현상을 환영하고 있다.","혼밥이 늘어난 원인을 객관적으로 분석하고 있다.","식사 시간을 줄여야 한다고 주장하고 있다."],0,"「되돌아볼 필요가 있다」＝見直すことを促している。",[["혼밥","一人ご飯"],["시선","視線・まなざし"],["쌓다","築く"],["되돌아보다","振り返る"]],"最近「一人ご飯」が増え、一人で食事をするのを変に見る視線が減った。しかし食事は単に栄養を摂ることではなく、会話を通じて関係を築く時間でもある。ときには家族や友人と囲む食卓の価値を振り返る必要がある。"],
-["科学・技術","일부 전문가들은 자율주행차가 곧 모든 교통사고를 없앨 것이라고 말한다. 그러나 기술은 아직 폭우나 폭설 같은 상황에서 불안정하며, 사고가 났을 때의 책임 소재도 정해지지 않았다. 지나친 기대는 오히려 위험을 키울 수 있다.","「筆者の態度」",["자율주행차 기술의 완성도를 높이 평가하고 있다.","자율주행차의 상용화 시기를 예측하고 있다.","자율주행차에 대한 지나친 기대를 경계하고 있다.","교통사고 통계를 바탕으로 원인을 분석하고 있다."],2,"「지나친 기대는 오히려 위험을 키울 수 있다」＝過度な期待への警戒。",[["자율주행차","自動運転車"],["불안정하다","不安定だ"],["책임 소재","責任の所在"],["경계하다","警戒する"]],"一部の専門家は、自動運転車がまもなくすべての交通事故をなくすと言う。しかし技術はまだ豪雨や豪雪のような状況で不安定で、事故の際の責任の所在も決まっていない。過度な期待は、かえって危険を大きくしかねない。"]
-];
-const app=document.getElementById('app');let qs,i,sc,wrong,done;
-function shuffle(a){a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[a[k],a[j]]=[a[j],a[k]]}return a}
-function home(){app.innerHTML=`<h2>TOPIK 6級 読解ドリル（ミックス）</h2><div class="c"><p>科学・経済・言語・文化・社会・環境・歴史のオリジナル問題 ${Q.length}問。穴埋め／文挿入／主題／筆者の態度の4タイプ。</p><p class="s">解答後に日本語の解説・訳・単語が出ます。</p><button class="p1" onclick="start(Q)">全問に挑戦</button><button class="p1" onclick="start(shuffle(Q).slice(0,6))">ランダム6問</button></div><p class="s">※問題・解説・訳はすべて作成したオリジナルです（過去問ではありません）。</p>`}
-function start(l){qs=shuffle(l);i=0;sc=0;wrong=[];show()}
-function show(){if(i>=qs.length)return end();const q=qs[i];done=false;
-app.innerHTML=`<div class="s">${i+1} / ${qs.length}　正解 ${sc}</div><div class="bar"><i style="width:${i/qs.length*100}%"></i></div><div class="c"><span class="t">${q[0]}</span><span class="t">${q[2]}</span><div class="p" style="margin-top:8px">${q[1]}</div></div><div id="o">${q[3].map((t,k)=>`<button onclick="pick(${k})">${'①②③④'[k]} ${t}</button>`).join('')}</div><div id="x"></div>`}
-function pick(k){if(done)return;done=true;const q=qs[i],b=document.querySelectorAll('#o button');b[q[4]].classList.add('ok');
-if(k==q[4])sc++;else{b[k].classList.add('ng');wrong.push(q)}
-document.getElementById('x').innerHTML=`<div class="c"><b>${k==q[4]?'⭕ 正解':'❌ 不正解（正解は'+'①②③④'[q[4]]+'）'}</b><p>${q[5]}</p><div class="v" style="white-space:pre-wrap"><b>🇯🇵 日本語訳</b>\n${q[7]}</div><div class="v"><b>📖 単語・表現</b>${q[6].map(w=>`<div><span>${w[0]}</span><span class="sp" onclick="say('${w[0]}')">🔊</span>${w[1]}</div>`).join('')}</div><button class="p1" onclick="i++;show()">${i+1<qs.length?'次へ':'結果を見る'}</button></div>`}
-const D={};Q.forEach(q=>q[6].forEach(w=>D[w[0]]=w[1]));
-function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang='ko-KR';u.rate=.8;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
-function dict(){const d=document.getElementById('dp');d.style.display=d.style.display=='block'?'none':'block'}
-function look(){const v=document.getElementById('di').value.trim(),o=document.getElementById('dr');if(!v){o.innerHTML='';return}
-const r=Object.entries(D).filter(([k,m])=>k.includes(v)||m.includes(v)).slice(0,8),e=encodeURIComponent(v);
-o.innerHTML=(r.length?r.map(([k,m])=>`<div class="dr"><b>${k}</b> <span class="sp" onclick="say('${k}')">🔊</span> ${m}</div>`).join(''):'<p class="s">単語帳には見つかりませんでした。</p>')+`<p><a target="_blank" rel="noopener" href="https://ja.dict.naver.com/#/search?query=${e}">Naver辞書</a>　<a target="_blank" rel="noopener" href="https://papago.naver.com/?sk=ko&tk=ja&st=${e}">Papago</a>　<a target="_blank" rel="noopener" href="https://translate.google.com/?sl=ko&tl=ja&text=${e}">Google翻訳</a></p>`}
-document.body.insertAdjacentHTML('beforeend','<button onclick="dict()" style="position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:auto;border-radius:99px;box-shadow:0 2px 8px #0004;z-index:10">🔍 辞書</button><div id="dp" style="display:none;position:fixed;left:0;right:0;bottom:0;max-height:70%;overflow:auto;background:var(--card);border-top:1px solid var(--bd);padding:14px 16px 70px;z-index:9"><b>単語を調べる</b><input id="di" placeholder="韓国語または日本語を入力" oninput="clearTimeout(window.tm);window.tm=setTimeout(look,400)"><div id="dr"></div></div>');
-function end(){app.innerHTML=`<h2>結果：${sc} / ${qs.length}</h2><div class="c"><div class="bar"><i style="width:${sc/qs.length*100}%"></i></div>${wrong.length?`<button class="p1" style="margin-top:12px" onclick="start(wrong)">間違えた${wrong.length}問をやり直す</button>`:'<p>全問正解！🎉</p>'}<button onclick="home()">トップへ</button></div>`}
-home();
-</script></body></html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>読解クイズ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main id="app">
+        <h2>読解クイズ</h2>
+        <p class="s">学ぶ言語を選んでください。</p>
+        <a class="card link" href="korean.html"><b>韓国語</b><span class="s">TOPIK 読解</span></a>
+        <a class="card link" href="english.html"><b>英語</b><span class="s">TOEIC 文法・読解</span></a>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>英語 読解クイズ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        /* このページのスプレッドシート設定（「ウェブに公開」→ CSV のURLを貼る） */
+        window.QUIZ = {
+            TITLE: "英語 読解クイズ",
+            QUESTIONS_CSV_URL: "", // 「問題一覧」シートの公開CSV URL
+            WORDS_CSV_URL: ""      // 「単語帳」シートの公開CSV URL（省略可）
+        };
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

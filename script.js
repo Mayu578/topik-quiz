@@ -82,8 +82,8 @@ function home(msg){
   <button class="main" onclick="startFromHome()">始める</button></div>
   <div class="card"><b>データの読み込み</b>
   <p class="s">スプレッドシートを CSV で保存して選びます（問題一覧と単語帳を別々に）。</p>
-  <label class="s">問題一覧.csv</label><input type="file" accept=".csv" onchange="pickFile(this,'q')">
-  <label class="s">単語帳.csv（省略可）</label><input type="file" accept=".csv" onchange="pickFile(this,'w')"></div>`;
+  <label class="s">問題一覧.csv</label><input type="file" accept=".csv,text/csv,text/comma-separated-values,application/vnd.ms-excel,text/plain" onchange="pickFile(this,'q')">
+  <label class="s">単語帳.csv（省略可）</label><input type="file" accept=".csv,text/csv,text/comma-separated-values,application/vnd.ms-excel,text/plain" onchange="pickFile(this,'w')"></div>`;
 }
 function pickFile(el,kind){
   const f=el.files[0];if(!f)return;

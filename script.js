@@ -1,4 +1,4 @@
-/* 設定は各HTML（korean.html / english.html）の window.QUIZ に書きます */
+/* 設定は各HTML（korean.html / english.html / chinese.html）の window.QUIZ に書きます */
 const CONFIG = window.QUIZ || {};
 document.title = CONFIG.TITLE || document.title;
 
@@ -8,6 +8,9 @@ const SAMPLE_Q = `No.,出典,種類,問題文（韓国語）,①,②,③,④,正
 
 const $ = id => document.getElementById(id), app = $('app'), MARK = '①②③④';
 let ALL = [], pool, i, score, wrong, locked;
+
+/* 読み上げ（言語は各HTMLの LANG で決める。例: "ko-KR" "en-US" "zh-CN"） */
+function say(t) { try { const u = new SpeechSynthesisUtterance(t); u.lang = CONFIG.LANG || 'ko-KR'; u.rate = .8; speechSynthesis.cancel(); speechSynthesis.speak(u) } catch (e) { } }
 
 /* CSVパーサ（引用符・改行入りセルに対応） */
 function parseCSV(t) {
@@ -47,7 +50,8 @@ function loadQuestions(text) {
     ch: ['①', '②', '③', '④'].map(m => o['選択肢' + m] || o[m] || '').filter(Boolean),
     ans: num(o['正解番号']),
     exp: col(o, '解説'),
-    ja: col(o, '日本語訳')
+    ja: col(o, '日本語訳'),
+    py: col(o, 'ピンイン', '拼音', 'pinyin', 'Pinyin')
   })).filter(q => q.text && q.ch.length > 1 && q.ans >= 0 && q.ans < q.ch.length);
 }
 
@@ -98,7 +102,7 @@ function show() {
   app.innerHTML = `<div class="s">${i + 1} / ${pool.length}　正解 ${score}</div>
   <div class="bar"><i style="width:${i / pool.length * 100}%"></i></div>
   <div class="card"><span class="tag">${q.src}</span><span class="tag">${q.type}</span>
-  <div class="q" style="margin-top:8px">${esc(q.text)}</div></div>
+  <div class="q" style="margin-top:8px">${esc(q.text)} <span class="sp" onclick="say(pool[i].text)">🔊</span></div></div>
   <div id="o">${q.order.map((k, n) => `<button class="opt" onclick="answer(${n})">${MARK[n]} ${esc(q.ch[k])}</button>`).join('')}</div>
   <div id="r"></div>`;
 }
@@ -110,6 +114,7 @@ function answer(n) {
   $('r').innerHTML = `<div class="card"><b>${hit ? '⭕ 正解' : '❌ 不正解（正解は' + MARK[right] + '）'}</b>
   <p>${esc(q.exp)}</p>
   ${q.ja ? `<div class="box"><b>日本語訳</b>\n${esc(q.ja)}</div>` : ''}
+  ${q.py ? `<div class="box"><b>ピンイン</b>\n${esc(q.py)}</div>` : ''}
   <button class="main" onclick="i++;show()">${i + 1 < pool.length ? '次へ' : '結果を見る'}</button></div>`;
 }
 function end() {

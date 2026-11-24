@@ -1,4 +1,4 @@
-/* 設定は各HTML（korean.html / english.html）の window.QUIZ に書きます */
+/* 設定は各HTML（korean.html / english.html / chinese.html）の window.QUIZ に書きます */
 const CONFIG = window.QUIZ || {};
 document.title = CONFIG.TITLE || document.title;
 
